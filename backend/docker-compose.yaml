@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: 'postgres'
+    environment:
+      - "POSTGRES_DB=weather"
+      - "POSTGRES_PASSWORD=weather"
+      - "POSTGRES_USER=weather"
+    ports:
+      - "6432:5432"
