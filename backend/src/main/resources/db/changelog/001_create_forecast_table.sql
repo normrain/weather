@@ -3,5 +3,6 @@ CREATE TABLE forecast(
                      day_id uuid not null,
                      night_id uuid not null,
                      date DATE not null,
-                     text VARCHAR
+                     text VARCHAR,
+                     created_at TIMESTAMP not null
 );

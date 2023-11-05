@@ -1,6 +1,7 @@
 package com.testtask.weather.backend.domain.place.entity;
 
 import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.UUID;
 
@@ -10,8 +11,10 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
+@Jacksonized
 public class Place {
     private UUID id;
+    private String name;
     private UUID forecastDaytimeId;
     private String phenomenon;
     private int tempmin;

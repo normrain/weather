@@ -2,6 +2,7 @@ package com.testtask.weather.backend.domain.forecast.entity;
 
 import lombok.*;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.UUID;
 
@@ -17,4 +18,5 @@ public class Forecast {
     private UUID nightId;
     private Date date;
     private String text;
+    private Instant createdAt;
 }

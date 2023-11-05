@@ -1,10 +1,9 @@
 package com.testtask.weather.backend.domain.forecast_daytime.entity;
 
-import com.testtask.weather.backend.domain.forecast.api.model.PlaceDTO;
 import com.testtask.weather.backend.util.enums.forecast_type.ForecastType;
 import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -13,6 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
+@Jacksonized
 public class ForecastDaytime {
     private UUID id;
     private String phenomenon;

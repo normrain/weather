@@ -1,4 +1,4 @@
-package com.testtask.weather.backend.domain.forecast.api.model;
+package com.testtask.weather.backend.domain.forecast.api.model.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

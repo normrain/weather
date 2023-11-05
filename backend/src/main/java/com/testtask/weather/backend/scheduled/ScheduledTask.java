@@ -2,10 +2,9 @@ package com.testtask.weather.backend.scheduled;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.testtask.weather.backend.domain.forecast.api.model.ForecastDTO;
-import com.testtask.weather.backend.domain.forecast.api.model.ForecastsDTO;
-import com.testtask.weather.backend.domain.forecast.api.model.PlaceDTO;
-import com.testtask.weather.backend.domain.forecast.entity.Forecast;
+import com.testtask.weather.backend.domain.forecast.api.model.dtos.ForecastDTO;
+import com.testtask.weather.backend.domain.forecast.api.model.dtos.ForecastsDTO;
+import com.testtask.weather.backend.domain.forecast.api.model.dtos.PlaceDTO;
 import com.testtask.weather.backend.domain.forecast.service.ForecastService;
 import com.testtask.weather.backend.domain.forecast_daytime.entity.ForecastDaytime;
 import com.testtask.weather.backend.domain.forecast_daytime.service.ForecastDaytimeService;
@@ -29,7 +28,7 @@ public class ScheduledTask {
    private final ForecastDaytimeService forecastDaytimeService;
    private final ForecastDaytimeMapper forecastDaytimeMapper;
 
-   @Scheduled(fixedDelay = 1)
+   @Scheduled(cron = "0 0/30 * * * ?")
    public void fetchForecasts() throws IOException {
 
       RestTemplate restTemplate = new RestTemplate();

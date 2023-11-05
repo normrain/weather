@@ -1,7 +1,7 @@
 package com.testtask.weather.backend.util.mapper;
 
-import com.testtask.weather.backend.domain.forecast.api.model.DayDTO;
-import com.testtask.weather.backend.domain.forecast.api.model.NightDTO;
+import com.testtask.weather.backend.domain.forecast.api.model.dtos.DayDTO;
+import com.testtask.weather.backend.domain.forecast.api.model.dtos.NightDTO;
 import com.testtask.weather.backend.domain.forecast_daytime.entity.ForecastDaytime;
 import com.testtask.weather.backend.util.enums.forecast_type.ForecastType;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,5 @@
-package com.testtask.weather.backend.domain.forecast.api.model;
+package com.testtask.weather.backend.domain.forecast.api.model.dtos;
 
-import lombok.*;
 import java.util.Date;
 
 public record ForecastDTO (
