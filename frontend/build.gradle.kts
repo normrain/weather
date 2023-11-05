@@ -1,4 +1,5 @@
 import com.github.gradle.node.npm.proxy.ProxySettings
+import com.github.gradle.node.npm.task.NpmTask
 
 plugins {
     id("com.github.node-gradle.node") version "7.0.1"
@@ -23,3 +24,17 @@ tasks.npmInstall {
         exclude("notExistingFile")
     }
 }
+
+val buildTask = tasks.register<NpmTask>("buildWebapp") {
+    args.set(listOf("run", "build"))
+    dependsOn(tasks.npmInstall)
+    inputs.dir(project.fileTree("src").exclude("**/*.spec.ts"))
+    inputs.dir("node_modules")
+    outputs.dir("${project.buildDir}/webapp")
+}
+
+val startTask = tasks.register<NpmTask>("launchApp") {
+    args.set(listOf("run", "dev"))
+    dependsOn(tasks.npmInstall)
+}
+
