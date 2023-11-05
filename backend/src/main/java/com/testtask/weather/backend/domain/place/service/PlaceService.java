@@ -43,15 +43,4 @@ public class PlaceService {
                                 .build())
                 .collect(Collectors.toList());
     }
-    public PlaceResponse getPlacesWithNameAndForecastDaytimeId(UUID forecastDaytimeId, String name) {
-        Place place = placeRepository.findByIdAndName(forecastDaytimeId, name);
-        return  PlaceResponse.builder()
-                .id(place.getId())
-                .name(place.getName())
-                .phenomenon(place.getPhenomenon())
-                .tempmax(place.getTempmax())
-                .tempmin(place.getTempmin())
-                .build();
-    }
-
 }

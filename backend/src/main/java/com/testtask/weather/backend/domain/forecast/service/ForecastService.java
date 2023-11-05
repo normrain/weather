@@ -26,7 +26,6 @@ public class ForecastService {
 
     private final ForecastRepository forecastRepository;
     private final ForecastDaytimeService forecastDaytimeService;
-    private final PlaceService placeService;
 
     @Transactional
     public void createForecast(ForecastDTO forecastDTO, UUID dayId, UUID nightId) {
