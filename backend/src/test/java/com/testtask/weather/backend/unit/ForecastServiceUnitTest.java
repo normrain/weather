@@ -8,14 +8,18 @@ import com.testtask.weather.backend.domain.forecast.entity.Forecast;
 import com.testtask.weather.backend.domain.forecast.repository.ForecastRepository;
 import com.testtask.weather.backend.domain.forecast.service.ForecastService;
 import com.testtask.weather.backend.domain.forecast_daytime.service.ForecastDaytimeService;
+import com.testtask.weather.backend.helper.TestDataHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@RunWith(MockitoJUnitRunner.class)
 public class ForecastServiceUnitTest {
 
     @Mock
@@ -45,7 +49,7 @@ public class ForecastServiceUnitTest {
     void testCreateForecast() {
         UUID dayId = UUID.randomUUID();
         UUID nightId = UUID.randomUUID();
-        ForecastDTO forecastDTO = new ForecastDTO("Sample Text", Instant.now());
+        ForecastDTO forecastDTO = TestDataHelper.getForecastDTO();
         forecastService.createForecast(forecastDTO, dayId, nightId);
 
         verify(forecastRepository, times(1)).insert(any(Forecast.class));
@@ -56,11 +60,11 @@ public class ForecastServiceUnitTest {
         // Mock data setup
         UUID dayId = UUID.randomUUID();
         UUID nightId = UUID.randomUUID();
-        Forecast forecast = new Forecast(dayId, nightId, Instant.now(), "Sample Text");
+        Forecast forecast = new Forecast(UUID.randomUUID(), dayId, nightId, new Date(), "Test",Instant.now());
         when(forecastRepository.findAll()).thenReturn(List.of(forecast));
 
-        ForecastDaytimeResponse dayResponse = new ForecastDaytimeResponse();
-        ForecastDaytimeResponse nightResponse = new ForecastDaytimeResponse();
+        ForecastDaytimeResponse dayResponse = TestDataHelper.getForecastDaytimeResponse(dayId);
+        ForecastDaytimeResponse nightResponse = TestDataHelper.getForecastDaytimeResponse(nightId);
         when(forecastDaytimeService.getForecastDaytime(dayId)).thenReturn(dayResponse);
         when(forecastDaytimeService.getForecastDaytime(nightId)).thenReturn(nightResponse);
 
@@ -70,9 +74,8 @@ public class ForecastServiceUnitTest {
         // Assertions
         assertNotNull(forecasts);
         assertEquals(1, forecasts.size());
-        assertEquals(dayId, forecasts.get(0).getDay().getId());
-        assertEquals(nightId, forecasts.get(0).getNight().getId());
-        // Add more assertions based on your implementation
+        assertEquals(dayId, forecasts.get(0).day().id());
+        assertEquals(nightId, forecasts.get(0).night().id());
     }
 
     @Test
@@ -80,23 +83,22 @@ public class ForecastServiceUnitTest {
         // Mock data setup
         UUID dayId = UUID.randomUUID();
         UUID nightId = UUID.randomUUID();
-        Forecast forecast = new Forecast(dayId, nightId, Instant.now(), "Sample Text");
+        Forecast forecast = new Forecast(UUID.randomUUID(), dayId, nightId, new Date(), "Sample Text",Instant.now());
         when(forecastRepository.findAll()).thenReturn(List.of(forecast));
 
-        ForecastDaytimeResponse dayResponse = new ForecastDaytimeResponse();
-        ForecastDaytimeResponse nightResponse = new ForecastDaytimeResponse();
-        dayResponse.setPlace(List.of(new PlaceResponse("Place1")));
-        nightResponse.setPlace(List.of(new PlaceResponse("Place2")));
+        ForecastDaytimeResponse dayResponse = TestDataHelper.getForecastDaytimeResponse(dayId);
+        ForecastDaytimeResponse nightResponse = TestDataHelper.getForecastDaytimeResponse(nightId);
         when(forecastDaytimeService.getForecastDaytime(dayId)).thenReturn(dayResponse);
         when(forecastDaytimeService.getForecastDaytime(nightId)).thenReturn(nightResponse);
 
         // Test
-        List<PlaceResponse> places = forecastService.getForecastForPlace("Place1");
+        List<PlaceResponse> places = forecastService.getForecastForPlace("TestName");
 
         // Assertions
         assertNotNull(places);
-        assertEquals(1, places.size());
-        assertEquals("Place1", places.get(0).getName());
-        // Add more assertions based on your implementation
+        assertEquals(2, places.size());
+        assertEquals("TestName", places.get(0).name());
+        assertEquals("TestName", places.get(1).name());
+
     }
 }

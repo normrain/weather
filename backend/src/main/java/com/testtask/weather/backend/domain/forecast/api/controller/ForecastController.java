@@ -21,13 +21,14 @@ import java.util.List;
 public class ForecastController {
 
     private final ForecastService forecastService;
+
     @GetMapping(value = "/", produces = {"application/json"})
     public List<ForecastResponse> getForecasts() {
         return forecastService.getForecasts();
     }
 
-    @GetMapping(value="/{place}")
-    public List<PlaceResponse> getForecastForPlace(@PathVariable String place){
+    @GetMapping(value = "/{place}")
+    public List<PlaceResponse> getForecastForPlace(@PathVariable String place) {
         return forecastService.getForecastForPlace(place);
 
     }

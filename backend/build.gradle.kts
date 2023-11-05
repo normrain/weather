@@ -35,6 +35,8 @@ dependencies {
 	implementation ("com.fasterxml.jackson.core:jackson-databind:2.12.7.1")
 	implementation ("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.5")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3")
+	testImplementation("junit:junit:4.13.1")
+	testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
 
 }
 

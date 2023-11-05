@@ -7,10 +7,11 @@ import com.testtask.weather.backend.domain.place.repository.PlaceRepository;
 import com.testtask.weather.backend.domain.place.service.PlaceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@RunWith(MockitoJUnitRunner.class)
 public class PlaceServiceUnitTest {
 
     @Mock
@@ -46,15 +47,17 @@ public class PlaceServiceUnitTest {
     @Test
     void testGetPlacesForForecastDaytime() {
         UUID forecastDaytimeId = UUID.randomUUID();
-        Place place = new Place(forecastDaytimeId, "PlaceName", "Sunny", 30, 20);
-        when(placeRepository.findById(forecastDaytimeId)).thenReturn(List.of(place));
+        List<Place> places = List.of(
+                new Place(UUID.randomUUID(), "PlaceName", forecastDaytimeId, "Sunny", 30, 20)
+        );
 
-        List<PlaceResponse> places = placeService.getPlacesForForecastDaytime(forecastDaytimeId);
+        when(placeRepository.findById(forecastDaytimeId)).thenReturn(places);
 
-        verify(placeRepository, times(1)).findById(forecastDaytimeId);
-        assertNotNull(places);
-        assertEquals(1, places.size());
-        assertEquals("PlaceName", places.get(0).getName());
-        // Add more assertions based on your implementation
+        List<PlaceResponse> result = placeService.getPlacesForForecastDaytime(forecastDaytimeId);
+
+
+        assertNotNull(result);
+        assertEquals(result.size(), places.size());
+        assertEquals("PlaceName", result.get(0).name());
     }
 }

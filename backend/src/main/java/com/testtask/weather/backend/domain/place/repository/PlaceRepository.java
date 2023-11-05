@@ -15,15 +15,11 @@ public interface PlaceRepository {
 
     @Insert("INSERT INTO place(name, forecast_daytime_id, phenomenon, tempmin, tempmax) " +
             "VALUES (#{name}, #{forecastDaytimeId}, #{phenomenon}, #{tempmin}, #{tempmax}) RETURNING id")
-    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(Place place);
 
     @Select("SELECT * FROM place WHERE forecast_daytime_id = #{forecastDaytimeId}")
     @Result(property = "forecastDaytimeId", column = "forecast_daytime_id")
     List<Place> findById(UUID forecastDaytimeId);
-
-    @Select("SELECT * FROM place WHERE forecast_daytime_id = #{forecastDaytimeId} AND name = #{name}")
-    @Result(property = "forecastDaytimeId", column = "forecast_daytime_id")
-    Place findByIdAndName(UUID forecastDaytimeId, String name);
 
 }

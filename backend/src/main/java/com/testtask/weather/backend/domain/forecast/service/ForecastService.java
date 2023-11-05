@@ -40,10 +40,10 @@ public class ForecastService {
         );
     }
 
-    public List<ForecastResponse> getForecasts(){
+    public List<ForecastResponse> getForecasts() {
         List<Forecast> forecasts = forecastRepository.findAll();
         List<ForecastResponse> forecastResponse = new ArrayList<>();
-        for(Forecast forecast : forecasts){
+        for (Forecast forecast : forecasts) {
             ForecastDaytimeResponse dayResponse = forecastDaytimeService.getForecastDaytime(forecast.getDayId());
             ForecastDaytimeResponse nightResponse = forecastDaytimeService.getForecastDaytime(forecast.getNightId());
             forecastResponse.add(
@@ -61,11 +61,11 @@ public class ForecastService {
     public List<PlaceResponse> getForecastForPlace(String placeName) {
         List<Forecast> forecasts = forecastRepository.findAll();
         List<PlaceResponse> placeResponse = new ArrayList<>();
-        for(Forecast forecast : forecasts) {
+        for (Forecast forecast : forecasts) {
             ForecastDaytimeResponse dayResponse = forecastDaytimeService.getForecastDaytime(forecast.getDayId());
             ForecastDaytimeResponse nightResponse = forecastDaytimeService.getForecastDaytime(forecast.getNightId());
 
-            if(dayResponse.place() != null && nightResponse != null) {
+            if (dayResponse.place() != null && nightResponse != null) {
                 placeResponse.add(dayResponse.place().stream()
                         .filter(place -> placeName.equals(place.name()))
                         .findAny()

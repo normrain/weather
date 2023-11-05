@@ -12,9 +12,10 @@ import java.util.UUID;
 
 @Builder
 @Jacksonized
-public record ForecastResponse (
-    UUID id,
-    ForecastDaytimeResponse day,
-    ForecastDaytimeResponse night,
-    Date date
-){}
+public record ForecastResponse(
+        UUID id,
+        ForecastDaytimeResponse day,
+        ForecastDaytimeResponse night,
+        Date date
+) {
+}

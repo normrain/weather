@@ -14,7 +14,7 @@ public interface ForecastDaytimeRepository {
 
     @Insert("INSERT INTO forecast_daytime(phenomenon, tempmin, tempmax, text, type) " +
             "VALUES (#{phenomenon}, #{tempmin}, #{tempmax}, #{text}, #{type}) RETURNING id")
-    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(ForecastDaytime forecastDaytime);
 
     @Select("SELECT * FROM forecast_daytime WHERE id = #{id}")

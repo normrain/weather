@@ -7,10 +7,11 @@ import java.util.UUID;
 
 @Builder
 @Jacksonized
-public record PlaceResponse (
-    UUID id,
-    String name,
-    String phenomenon,
-    int tempmin,
-    int tempmax
-){}
+public record PlaceResponse(
+        UUID id,
+        String name,
+        String phenomenon,
+        int tempmin,
+        int tempmax
+) {
+}

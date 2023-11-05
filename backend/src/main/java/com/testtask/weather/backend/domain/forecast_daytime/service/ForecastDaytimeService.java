@@ -28,7 +28,6 @@ public class ForecastDaytimeService {
     public ForecastDaytimeResponse getForecastDaytime(UUID id) {
         ForecastDaytime forecastDaytime = forecastDaytimeRepository.findById(id);
         List<PlaceResponse> places = placeService.getPlacesForForecastDaytime(id);
-        System.out.println(places);
         return ForecastDaytimeResponse.builder()
                 .id(id)
                 .phenomenon(forecastDaytime.getPhenomenon())

@@ -13,7 +13,7 @@ public interface ForecastRepository {
 
     @Insert("INSERT INTO forecast(day_id, night_id, date, text, created_at) " +
             "VALUES (#{dayId}, #{nightId}, #{date}, #{text}, #{createdAt}) RETURNING id")
-    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(Forecast forecast);
 
     @Select("SELECT * FROM forecast ORDER BY created_at LIMIT 4")

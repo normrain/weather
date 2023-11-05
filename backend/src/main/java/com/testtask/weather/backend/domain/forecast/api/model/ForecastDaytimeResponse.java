@@ -10,11 +10,12 @@ import java.util.UUID;
 
 @Builder
 @Jacksonized
-public record ForecastDaytimeResponse (
-     UUID id,
-     String phenomenon,
-     int tempmin,
-     int tempmax,
-     String text,
-     List<PlaceResponse> place
-) {}
+public record ForecastDaytimeResponse(
+        UUID id,
+        String phenomenon,
+        int tempmin,
+        int tempmax,
+        String text,
+        List<PlaceResponse> place
+) {
+}

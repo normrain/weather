@@ -1,10 +1,14 @@
 package com.testtask.weather.backend.domain.forecast.api.model.dtos;
 
+import lombok.Builder;
+
 import java.util.Date;
 
-public record ForecastDTO (
-    NightDTO night,
-    DayDTO day,
-    Date date,
-    String text
-) {}
+@Builder
+public record ForecastDTO(
+        NightDTO night,
+        DayDTO day,
+        Date date,
+        String text
+) {
+}

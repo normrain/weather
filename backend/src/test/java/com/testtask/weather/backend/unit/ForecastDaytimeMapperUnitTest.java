@@ -6,12 +6,14 @@ import com.testtask.weather.backend.domain.forecast_daytime.entity.ForecastDayti
 import com.testtask.weather.backend.util.enums.forecast_type.ForecastType;
 import com.testtask.weather.backend.util.mapper.ForecastDaytimeMapper;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
 
+@RunWith(MockitoJUnitRunner.class)
 class ForecastDaytimeMapperUnitTest {
 
     @Test
